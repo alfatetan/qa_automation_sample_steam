@@ -9,4 +9,11 @@ def start_browser(context):
     """
     context.driver.get(context.URL)
     # TODO: Add page loading checking via explisitly waiting
-    
+
+@step("Maximize browser window")
+def maximize_browser(context):
+    """
+    Maximize the browser's window
+    """
+    context.driver.maximize_window()
+
