@@ -7,7 +7,11 @@ import re
 #     pass
 
 def before_feature(context, feature):
+    # Our basic URL as a constant
     context.URL = "https://store.steampowered.com/"
+    # Create an empty list for logging
+    context.LOG = [f"Testing report from {dt.now().strftime("%Y-%m-%d_%H:%M:%S")}",
+                   f"Feature: {feature.name}"]
 
 def before_scenario(context, scenario):
     # Activate Chrome driver
@@ -15,8 +19,8 @@ def before_scenario(context, scenario):
     # Set an implicitly wait period (3 seconds)
     context.driver.implicitly_wait(3)
 
-def before_step(context, step):
-    pass
+# def before_step(context, step):
+#     pass
 
 def after_step(context, step):
     # if step is filed take a screenshot
@@ -35,10 +39,21 @@ def after_step(context, step):
     pass
 
 def after_scenario(context, scenario):
-    pass
+    # Close window
+    context.driver.close()
+    # Quit the chrome driver
+    context.driver.quit()
 
 def after_feature(context, feature):
-    pass
+    context.LOG.append("======== END OF TESTING REPORT ========")
+    context.LOG.append(f"Feature: {feature.name}")
+    # Create a name of log file
+    feature_name = "_".join(re.findall('\w+', feature.name))
+    filename = f'{dt.now().strftime("%Y-%m-%d_%H:%M:%S")}_{feature_name}'
+    # Save log information to the file
+    with open(f"./reports/{filename}", "w") as log_file:
+        for line in context.LOG:
+            log_file.write(line)
 
 # def after_all():
 #     pass
