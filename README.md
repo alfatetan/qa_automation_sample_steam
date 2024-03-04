@@ -1,17 +1,18 @@
 # Example QA framework for Steam (Video Games Store)
 
-\*\*\* This framework in the process of creating
+#### :bangbang: Note: This framework in the process of creating
 
 ## Installation
 
 #### Requirements:
 
 - Any Unix/Linux OS (MacOS, Ubuntu, Debian, CentOS, RedHat, Archlinux, etc.)
-- Installed Python interpreter version 3.9
-- Opened Terminal and fingers :stuck_out_tongue_winking_eye:
+- Google Chrome last version
+- Installed Python interpreter version 3.9 or higher
+- Opened Terminal and your fingers :stuck_out_tongue_winking_eye:
 - That's it!
 
-#### Steps:
+#### Steps (in the terminal window):
 
 - Clone this repository:
 
@@ -27,6 +28,7 @@ $ source ./.venv/bin/activate
 
 # Try to check if the Python interpreter has been activated correctly
 $ which python
+
 # It should show the path to the current pythons interpreter in ".../qa_automation_sample_steam/.venv/bin/python"
 ```
 
@@ -73,3 +75,7 @@ urllib3               2.1.0
 webdriver-manager     4.0.1
 wsproto               1.2.0
 ```
+
+## Running tests
+
+<!-- TODO: *** Here I'll write how the tests should be run -->
