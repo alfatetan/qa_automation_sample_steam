@@ -1,6 +1,7 @@
 # Selenium hooks implementation
 from selenium import webdriver
 from datetime import datetime as dt
+import re
 
 # def before_all():
 #     pass
@@ -20,8 +21,14 @@ def before_step(context, step):
 def after_step(context, step):
     # if step is filed take a screenshot
     if step.status == "failed":
-        # TODO: Scroll to the element
+        # Scroll to the element
+        if context.selected_element:
+            actions = ActionChains(context.driver)
+            actions.move_to_element(context.selected_element).perform()
+
         # TODO: Make a screenshot filename
+        screenshot_name = "_".join(re.findall('\w+', step.name))
+        filename = f'{dt.now().strftime("%Y-%m-%d_%H:%M:%S")}_{screenshot_name}'
         
         # TODO: Save it into the report folder
         context.driver.save_screenshot(f"./reports/screenshots/{filename}")
