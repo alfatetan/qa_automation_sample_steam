@@ -10,8 +10,7 @@ def before_feature(context, feature):
     # Our basic URL as a constant
     context.URL = "https://store.steampowered.com/"
     # Create an empty list for logging
-    context.LOG = [f"Testing report from {dt.now().strftime("%Y-%m-%d_%H:%M:%S")}",
-                   f"Feature: {feature.name}"]
+    context.LOG = [f"Testing report from {dt.now().strftime('%Y-%m-%d_%H:%M:%S')}", f"Feature: {feature.name}"]
 
 def before_scenario(context, scenario):
     # Activate Chrome driver
@@ -19,14 +18,15 @@ def before_scenario(context, scenario):
     # Set an implicitly wait period (3 seconds)
     context.driver.implicitly_wait(3)
 
-# def before_step(context, step):
-#     pass
+def before_step(context, step):
+    # No one element has been selected before the step
+    context.SELECTED_ELEMENT = False
 
 def after_step(context, step):
     # if step is filed take a screenshot
     if step.status == "failed":
-        # Scroll to the element
-        if context.selected_element:
+        # If selected element has a bag, scroll to the element
+        if context.SELECTED_ELEMENT:
             actions = ActionChains(context.driver)
             actions.move_to_element(context.selected_element).perform()
 
@@ -53,7 +53,7 @@ def after_feature(context, feature):
     # Save log information to the file
     with open(f"./reports/{filename}", "w") as log_file:
         for line in context.LOG:
-            log_file.write(line)
+            log_file.write(f"{line}\n")
 
 # def after_all():
 #     pass

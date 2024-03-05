@@ -12,8 +12,8 @@ def start_browser(context):
     context.driver.get(context.URL)
     # Add page loading checking via explicitly waiting. Checking the loading of a last section (Header)
     last_header = Wait(context.driver, 4).until(EC.presence_of_element_located((By.XPATH,'//h2[contains(text(), "Updates and Offers")]')), message = "*** ERROR: Main page does not appear!!! ***")
-    if "ERROR" in last_header:
-        context.LOG.append(last_header)
+    # if "ERROR" in last_header:
+    #     context.LOG.append(last_header)
     
 
 @step("Maximize browser window")
